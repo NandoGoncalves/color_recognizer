@@ -5,9 +5,9 @@ import os
 
 width = 128 
 height = 128
-images_per_classes = 500
+images_per_classes = 600
 
-df = pd.read_csv ("./dataset/color_range.csv", sep=';', usecols= ['color', 'color_name','red', 'green', 'blue']) 
+df = pd.read_csv ("./dataset/color_range.csv", sep=';', usecols= ['color', 'color_name','red', 'green', 'blue', 'lig']) 
 print(df.head())
 
 i = 0
@@ -24,6 +24,10 @@ while(True):
             red = row['red']
             green = row['green']
             blue = row['blue']
+            lig = row['lig']
+
+            #if lig > 50 or lig < 40:
+            #    continue
 
             path = os.path.join('images', f, color)
             pathlib.Path(path).mkdir(parents=True, exist_ok=True)

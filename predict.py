@@ -2,7 +2,7 @@ from tensorflow import keras
 from keras_preprocessing import image
 import os
 
-model = keras.models.load_model('./models/model_00.h5')
+model = keras.models.load_model('./models/model_01.h5')
 
 model.summary()
 
@@ -24,7 +24,7 @@ for subdir, dirs, files in os.walk(predict_folder):
         y_prob = model.predict(x) 
         y_classes = y_prob.argmax(axis=-1)
 
-        print(image_name, ':', y_labels[int(y_classes)])
+        print(image_name, ':', y_labels[int(y_classes)], y_classes)
         #print(y_classes)
         #print(y_labels[int(y_classes)])
 
