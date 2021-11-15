@@ -1,1 +1,3 @@
 http://www.workwithcolor.com/red-color-hue-range-01.htm
+https://unsplash.com/s/photos/red
+https://medium.com/analytics-vidhya/building-rgb-color-classifier-part-1-af58e3bcfef7

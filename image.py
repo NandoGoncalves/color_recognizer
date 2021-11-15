@@ -2,12 +2,20 @@ import pandas as pd
 from PIL import Image
 import pathlib
 import os
+import csv
 
 width = 128 
 height = 128
 images_per_classes = 600
 
-df = pd.read_csv ("./dataset/color_range.csv", sep=';', usecols= ['color', 'color_name','red', 'green', 'blue', 'lig']) 
+
+f_csv = open(os.path.join('images', 'images_color_range.csv'), 'w', newline='')
+writer_csv = csv.writer(f_csv)
+writer_csv.writerow(['red','green','blue','color'])
+
+
+
+df = pd.read_csv (os.path.join('dataset', "color_range.csv"), sep=';', usecols= ['color', 'color_name','red', 'green', 'blue', 'lig']) 
 print(df.head())
 
 i = 0
@@ -37,6 +45,7 @@ while(True):
                 image_name = color_name + '_' + str(i) +'.png'
                 image_full_path = os.path.join( path, image_name) 
                 img.save(image_full_path)
+                writer_csv.writerow([red,green,blue,color])
                 print(image_full_path)
                 i = i+1
     
@@ -45,4 +54,4 @@ while(True):
 
  
 
-
+f_csv.close()
