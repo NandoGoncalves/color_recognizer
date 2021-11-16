@@ -9,6 +9,7 @@ from keras_preprocessing.image import ImageDataGenerator
 from keras import regularizers
 
 import matplotlib.pyplot as plt
+import os
 
 width = 128 
 height = 128
@@ -40,7 +41,7 @@ model = keras.Sequential([
     keras.layers.Dense(32, activation='relu'), #  kernel_regularizer=regularizers.l2(0.001),
 
 
-    keras.layers.Dense(16)
+    keras.layers.Dense(17)
   ])
 
 

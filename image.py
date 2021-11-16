@@ -4,10 +4,16 @@ import pathlib
 import os
 import csv
 
+import sys
+
 width = 128 
 height = 128
-images_per_classes = 600
+images_per_classes = 1000
 
+color_range_csv = 'color_range.csv' 
+
+if len(sys.argv) > 1:
+    color_range_csv = 'color_range_with_gray.csv'
 
 f_csv = open(os.path.join('images', 'images_color_range.csv'), 'w', newline='')
 writer_csv = csv.writer(f_csv)
@@ -15,7 +21,7 @@ writer_csv.writerow(['red','green','blue','color'])
 
 
 
-df = pd.read_csv (os.path.join('dataset', "color_range.csv"), sep=';', usecols= ['color', 'color_name','red', 'green', 'blue', 'lig']) 
+df = pd.read_csv (os.path.join('dataset', color_range_csv), sep=';', usecols= ['color', 'color_name','red', 'green', 'blue', 'lig']) 
 print(df.head())
 
 i = 0
