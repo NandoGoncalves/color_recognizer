@@ -2,6 +2,7 @@ import pandas as pd
 from PIL import Image
 import pathlib
 import os
+import shutil
 import csv
 
 import sys
@@ -25,6 +26,10 @@ df = pd.read_csv (os.path.join('dataset', color_range_csv), sep=';', usecols= ['
 print(df.head())
 
 i = 0
+
+shutil.rmtree(os.path.join('images', 'train'), ignore_errors=True)
+shutil.rmtree(os.path.join('images', 'validation'), ignore_errors=True)
+shutil.rmtree(os.path.join('images', 'test'), ignore_errors=True)
 
 while(True):
 
