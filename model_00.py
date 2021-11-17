@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 
 width = 128 
 height = 128
-epochs = 40
+epochs = 10
 
 train_datagen = ImageDataGenerator(
     rescale=1./255,
@@ -29,7 +29,7 @@ train_generator = train_datagen.flow_from_directory(
 validation_generator = test_datagen.flow_from_directory(
     "./images/validation", target_size=(height,height), batch_size=32,class_mode='binary',shuffle=True)
 
-
+'''
 model = keras.Sequential()
 model.add(keras.layers.Flatten(input_shape=[width,height,3]))
 model.add(keras.layers.Dense(2048, activation='relu'))
@@ -39,12 +39,24 @@ model.add(keras.layers.Dense(512, activation='relu'))
 model.add(keras.layers.Dense(2048, activation=keras.layers.LeakyReLU(alpha=0.01))) # keras.layers.LeakyReLU(alpha=0.01)
 model.add(keras.layers.Dense(256, activation='relu'))
 model.add(keras.layers.Dense(128, activation='relu'))
+model.add(keras.layers.Dense(16)) # , activation='softmax'
+'''
+
+model = keras.Sequential()
+model.add(keras.layers.Flatten(input_shape=[width,height,3]))
+model.add(keras.layers.Dense(32, activation='relu'))
+model.add(keras.layers.Dense(32, activation='relu'))
+model.add(keras.layers.Dense(32, activation='relu'))
+model.add(keras.layers.Dense(32, activation='relu'))
+model.add(keras.layers.Dense(32, activation=keras.layers.LeakyReLU(alpha=0.01))) # keras.layers.LeakyReLU(alpha=0.01)
+#model.add(keras.layers.Dense(256, activation='relu'))
+#model.add(keras.layers.Dense(128, activation='relu'))
 model.add(keras.layers.Dense(16, activation='softmax'))
 
 model.summary()
 
 model.compile(optimizer='adam', 
-    loss='sparse_categorical_crossentropy',
+    loss= 'sparse_categorical_crossentropy',
     metrics=['acc'])
 
 history = model.fit_generator(train_generator, 
