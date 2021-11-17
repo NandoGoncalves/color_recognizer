@@ -12,7 +12,7 @@ import matplotlib.pyplot as plt
 
 width = 128 
 height = 128
-epochs = 20
+epochs = 10
 
 df = pd.read_csv ("./images/images_color_range.csv", sep=',') 
 #print(df['color'].head())
@@ -34,10 +34,10 @@ print(y_train)
 
 model = keras.Sequential([
     keras.layers.Dense(32, activation='relu', input_shape=[3]), #inputshape=[3] #  kernel_regularizer=regularizers.l2(0.001),
-    keras.layers.Dense(32, activation='relu'), #  kernel_regularizer=regularizers.l2(0.001),
+    keras.layers.Dense(64, activation='relu'), #  kernel_regularizer=regularizers.l2(0.001),
     keras.layers.Dense(32, activation='relu'), #  kernel_regularizer=regularizers.l2(0.001),
     keras.layers.Dense(24, activation='relu'), #  kernel_regularizer=regularizers.l2(0.001),
-    keras.layers.Dense(32, activation='relu'), #  kernel_regularizer=regularizers.l2(0.001),
+    keras.layers.Dense(16, activation='relu'), #  kernel_regularizer=regularizers.l2(0.001),
 
 
     keras.layers.Dense(16)
