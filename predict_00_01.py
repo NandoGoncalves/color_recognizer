@@ -2,7 +2,7 @@ from tensorflow import keras
 from keras_preprocessing import image
 import os
 
-model = keras.models.load_model('./models/model_01.h5')
+model = keras.models.load_model('./models/model_00.h5')
 
 model.summary()
 

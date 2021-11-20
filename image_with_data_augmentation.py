@@ -1,6 +1,6 @@
 import numpy as np
 import pandas as pd
-from PIL import Image
+from PIL import Image, ImageDraw
 import skimage
 from skimage import io
 import pathlib
@@ -12,13 +12,46 @@ import sys
 
 import random
 
-def transform(img_path):
+def transform(img_path, toggle=0, color=(255,0,0)):
 
     img = skimage.io.imread(img_path)/255 #.0
-    img = skimage.util.random_noise(img, mode='gaussian', mean=random.random(), var=random.random())
 
-    io.imsave(img_path, img) 
+    if toggle%2 == 0:
+        img = skimage.util.random_noise(img, mode='gaussian') # , mean=random.random(), var=random.random()
+    else:
+        img = skimage.util.random_noise(img, mode='salt')
+
+
+    io.imsave(img_path, img)
+
+    border(img_path, color)
+    ellipse(img_path, color)
+    rectangle(img_path, color)
+
+def border(img_path, color=(255,0,0)):
+    img = Image.open(img_path)
+    border_img = Image.new('RGB', (img.width, img.height), color)
+    border_img.paste(img, (int(img.width*random.random()/int((random.random()+1)*10)), int(img.height*random.random()/int((random.random()+1)*10))))
+    img = border_img.rotate(int(100*random.randint(-1, 1)))
+    border_img.save(img_path)    
+
+def ellipse(img_path, color=(255,0,0)):
+    img = Image.open(img_path)
     
+    draw = ImageDraw.Draw(img)
+    draw.ellipse((int(10*random.random()), int(30*random.random()), int(75*random.random()), int(100*random.random())), outline="black", width=int(5*random.random()),fill=color)
+    draw.ellipse((int(25*random.random()), int(75*random.random()), int(90*random.random()), int(110*random.random())), outline="white", width=int(5*random.random()),fill=color)
+    img = img.rotate(int(130*random.randint(-1, 1)))
+    img.save(img_path)
+
+def rectangle(img_path, color=(255,0,0)):
+    img = Image.open(img_path)
+    
+    draw = ImageDraw.Draw(img)
+    draw.rectangle((int(60*random.random()), int(70*random.random()), int(30*random.random()), int(120*random.random())), outline="white", width=int(10*random.random()),fill=color)
+    draw.rectangle((int(80*random.random()), int(90*random.random()), int(75*random.random()), int(100*random.random())), outline="black", width=int(10*random.random()),fill=color)
+    img = img.rotate(int(160*random.randint(-1, 1)))
+    img.save(img_path)
 
 width = 128 
 height = 128
@@ -58,8 +91,8 @@ while(True):
             blue = row['blue']
             lig = row['lig']
 
-            #if lig > 50 or lig < 40:
-            #    continue
+            if lig > 50 or lig < 40:
+                continue
 
             path = os.path.join('images', f, color)
             pathlib.Path(path).mkdir(parents=True, exist_ok=True)
@@ -76,11 +109,11 @@ while(True):
                 
                 img.save(image_full_path)
 
-                if i%3 == 0:
-                    transform(image_full_path)
+                if i%7 != 0:
+                    transform(image_full_path, i, color = (red, green, blue))
 
                 writer_csv.writerow([red,green,blue,color])
-                print(image_full_path)
+                print(i, image_full_path)
                 i = i+1
     
     if sum([len(files) for r, d, files in os.walk('./images')]) > (images_per_classes-100) * 16 * 3:
