@@ -55,7 +55,7 @@ def rectangle(img_path, color=(255,0,0)):
 
 width = 128 
 height = 128
-images_per_classes = 1000
+images_per_classes = 1500
 
 color_range_csv = 'color_range.csv' 
 
@@ -91,7 +91,7 @@ while(True):
             blue = row['blue']
             lig = row['lig']
 
-            if lig > 50 or lig < 40:
+            if lig > 85 or lig < 25:
                 continue
 
             path = os.path.join('images', f, color)

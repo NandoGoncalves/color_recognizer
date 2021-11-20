@@ -12,7 +12,7 @@ import matplotlib.pyplot as plt
 
 width = 128 
 height = 128
-epochs = 30
+epochs = 20
 
 df = pd.read_csv ("./images/images_color_range.csv", sep=',') 
 #print(df['color'].head())
@@ -27,20 +27,24 @@ y = df.drop(['red', 'green','blue'], axis=1)
 #print(X)
 print(y.columns)
 
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.10, random_state=124)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.20) # , random_state=42
 
 #print(X_train.shape, X_test.shape, y_train.shape, y_test.shape)
 print(y_train)
 
 model = keras.Sequential([
-    keras.layers.Dense(64, kernel_regularizer=regularizers.l1(0.001), activation='relu', input_shape=[3]), #inputshape=[3] # 
-    keras.layers.Dense(32, kernel_regularizer=regularizers.l2(0.001), activation='relu'), # 
-    keras.layers.Dense(32, kernel_regularizer=regularizers.l1(0.001), activation='relu'), # 
-    #keras.layers.Dense(1024, kernel_regularizer=regularizers.l1(0.001), activation='relu'), #
-    #keras.layers.Dense(1024, kernel_regularizer=regularizers.l2(0.001), activation='relu'), #    
-    keras.layers.Dense(24, kernel_regularizer=regularizers.l1(0.001), activation='relu'), #
-    #keras.layers.Dense(256, kernel_regularizer=regularizers.l2(0.001), activation='relu'), #
-    #keras.layers.Dense(128, kernel_regularizer=regularizers.l1(0.001), activation='relu'), #    
+    keras.layers.Dense(32, activation='relu', input_shape=[3]), #inputshape=[3] # , kernel_regularizer=regularizers.l2(0.001)
+    #keras.layers.Dense(64, activation='relu'), # , kernel_regularizer=regularizers.l2(0.001)
+    #keras.layers.Dense(128, activation='relu'), # , kernel_regularizer=regularizers.l2(0.001)
+    #keras.layers.Dense(254, activation='relu'), # , kernel_regularizer=regularizers.l2(0.001)
+    keras.layers.Dense(64, activation='relu'),
+    keras.layers.Dense(128, activation='relu'),
+    keras.layers.Dense(128, activation='relu'),
+    keras.layers.Dense(64, activation='relu'),
+    #keras.layers.Dense(254, activation='relu'), # , kernel_regularizer=regularizers.l2(0.001)   
+    #keras.layers.Dense(128, activation='relu'), # , kernel_regularizer=regularizers.l2(0.001)
+    #keras.layers.Dense(128, kernel_regularizer=regularizers.l2(0.001), activation='relu'), #
+    keras.layers.Dense(32, kernel_regularizer=regularizers.l2(0.001), activation='relu'), #    
     keras.layers.Dense(16, kernel_regularizer=regularizers.l2(0.001), activation='relu'), # 
 
 
@@ -49,7 +53,7 @@ model = keras.Sequential([
 
 
 
-optimizer = keras.optimizers.Adam(learning_rate=0.001)
+optimizer = keras.optimizers.Adam()#learning_rate=0.001
 loss_function = tf.keras.losses.CategoricalCrossentropy(from_logits=True)
 
 model.compile(loss=loss_function,
