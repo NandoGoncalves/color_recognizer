@@ -251,7 +251,7 @@ Pink-Red;196;30;58;#C41E3A;Cardinal;44;350;73;44
 Pink-Red;137;63;69;#893F45;Cordovan;36;355;37;39
 Pink-Red;150;0;24;#960018;Carmine;32;350;100;29
 Pink-Red;101;0;11;#65000B;Rosewood;21;353;100;20
-Gray;0;0;0;#000000;Black;0;0;0;0
+Black;0;0;0;#000000;Black;0;0;0;0
 Gray;8;8;8;#080808;Black;0;0;0;0
 Gray;16;16;16;#101010;Black;0;0;0;0
 Gray;24;24;24;#181818;Black;0;0;0;0
@@ -289,4 +289,4 @@ Gray;232;232;232;#E8E8E8;Gainsboro;0;0;0;0
 Gray;240;240;240;#F0F0F0;Gainsboro;0;0;0;0
 Gray;245;245;245;#F5F5F5;WhiteSmoke;0;0;0;0
 Gray;248;248;248;#F8F8F8;WhiteSmoke;0;0;0;0
-Gray;255;255;255;#FFFFFF;White;0;0;0;0
+White;255;255;255;#FFFFFF;White;50;50;50;50

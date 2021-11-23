@@ -11,10 +11,10 @@ model.summary()
 
 
 
-y_labels = ['Blue', 'Blue-Magenta', 'Cyan', 'Cyan-Blue', 'Gray',
+y_labels = ['Blue', 'Blue-Magenta', 'Cyan', 'Cyan-Blue', 
        'Green', 'Green-Cyan', 'Magenta',
        'Magenta-Pink', 'Orange-Brown', 'Orange-Yellow',
-       'Pink', 'Pink-Red', 'Red', 'Red-Orange',
+       'Pink', 'Pink-Red', 'Red', 'Red-Orange', 'White'
        'Yellow', 'Yellow-Green']
 
 ratios = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
@@ -44,10 +44,10 @@ for subdir, dirs, files in os.walk(predict_folder):
 
 
         color_labels = []
-        for index, row in df_color_sorted.head(3).iterrows():
+        for index, row in df_color_sorted.iterrows(): # .head(3)
             color_labels.append(row['color'])
 
-        print(image_name[0:10], '... : ', color_labels[0], ' - ', color_labels[1], ' - ', color_labels[2])
-
+        #print(image_name[0:10], '... : ', color_labels[0], ' - ', color_labels[1], ' - ', color_labels[2])
+        print(image_name[0:10], '... : ', color_labels)
 
 

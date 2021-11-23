@@ -2,3 +2,7 @@ http://www.workwithcolor.com/red-color-hue-range-01.htm
 https://www.w3schools.com/colors/colors_shades.asp
 https://unsplash.com/s/photos/red
 https://medium.com/analytics-vidhya/building-rgb-color-classifier-part-1-af58e3bcfef7
+https://www.blog.pythonlibrary.org/2021/02/23/drawing-shapes-on-images-with-python-and-pillow/
+https://pythoninformer.com/python-libraries/pillow/image-manipulation-recipes/
+https://gist.github.com/Prasad9/28f6a2df8e8d463c6ddd040f4f6a028a
+https://towardsdatascience.com/image-augmentation-examples-in-python-d552c26f2873

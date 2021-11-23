@@ -14,7 +14,7 @@ width = 128
 height = 128
 epochs = 20
 
-df = pd.read_csv ("./images/images_color_range.csv", sep=',') 
+df = pd.read_csv ("./images/color_range.csv", sep=',') 
 #print(df['color'].head())
 
 

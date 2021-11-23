@@ -13,9 +13,10 @@ import os
 
 width = 128 
 height = 128
-epochs = 20
+epochs = 15
+classes_count = 17
 
-df = pd.read_csv ("./images/images_color_range.csv", sep=',') 
+df = pd.read_csv ("./images/color_range_with_gray.csv", sep=',') 
 #print(df['color'].head())
 
 
@@ -28,20 +29,23 @@ y = df.drop(['red', 'green','blue'], axis=1)
 #print(X)
 print(y.columns)
 
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.20, random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.15, random_state=189)
 
 #print(X_train.shape, X_test.shape, y_train.shape, y_test.shape)
 print(y_train)
 
 model = keras.Sequential([
-    keras.layers.Dense(32, activation='relu', input_shape=[3]), #inputshape=[3] #  kernel_regularizer=regularizers.l2(0.001),
-    keras.layers.Dense(32, activation='relu'), #  kernel_regularizer=regularizers.l2(0.001),
-    keras.layers.Dense(32, activation='relu'), #  kernel_regularizer=regularizers.l2(0.001),
-    keras.layers.Dense(24, activation='relu'), #  kernel_regularizer=regularizers.l2(0.001),
-    keras.layers.Dense(32, activation='relu'), #  kernel_regularizer=regularizers.l2(0.001),
+    keras.layers.Dense(32, activation='relu', kernel_regularizer=regularizers.l2(0.003), input_shape=[3]), #inputshape=[3] # 
+    keras.layers.Dense(32, kernel_regularizer=regularizers.l2(0.003), activation='relu'), # 
+    keras.layers.Dense(32, kernel_regularizer=regularizers.l2(0.003), activation='relu'), #
+    keras.layers.Dense(64, kernel_regularizer=regularizers.l2(0.003), activation='relu'), # 
+    keras.layers.Dense(64, kernel_regularizer=regularizers.l2(0.003), activation='relu'), #     
+    keras.layers.Dense(32, kernel_regularizer=regularizers.l2(0.003), activation='relu'), #     
+    keras.layers.Dense(24, kernel_regularizer=regularizers.l2(0.003), activation='relu'), # 
+    keras.layers.Dense(32, kernel_regularizer=regularizers.l2(0.003), activation='relu'), #  
 
 
-    keras.layers.Dense(17)
+    keras.layers.Dense(classes_count)
   ])
 
 
@@ -56,9 +60,9 @@ model.compile(loss=loss_function,
 model.summary()
 
 history = model.fit(x=X, y=y, 
-                    validation_split=0.2, 
+                    validation_split=0.15, 
                     epochs=epochs, 
-                    batch_size=32, 
+                    batch_size=6, 
                     #verbose=0,
                     shuffle=True)
 

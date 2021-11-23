@@ -11,6 +11,10 @@ import csv
 import sys
 
 import random
+from time import sleep
+
+def random_color():
+    return random.randint(0, 256), random.randint(0, 256), random.randint(0, 256)
 
 def transform(img_path, toggle=0, color=(255,0,0)):
 
@@ -24,52 +28,61 @@ def transform(img_path, toggle=0, color=(255,0,0)):
 
     io.imsave(img_path, img)
 
-    border(img_path, color)
-    ellipse(img_path, color)
-    rectangle(img_path, color)
+    border(img_path, color) # 
+    ellipse(img_path, color) # 
+    rectangle(img_path, color) # 
 
-def border(img_path, color=(255,0,0)):
+def border(img_path, color=random_color()): # (255,0,0)
     img = Image.open(img_path)
-    border_img = Image.new('RGB', (img.width, img.height), color)
+    border_img = Image.new('RGB', (img.width, img.height), random_color())
     border_img.paste(img, (int(img.width*random.random()/int((random.random()+1)*10)), int(img.height*random.random()/int((random.random()+1)*10))))
-    img = border_img.rotate(int(100*random.randint(-1, 1)))
+    img = border_img.rotate(random.randint(0, 360), expand=1, fillcolor = color)
     border_img.save(img_path)    
 
-def ellipse(img_path, color=(255,0,0)):
+def ellipse(img_path, color=random_color()): #   (255,0,0)
     img = Image.open(img_path)
     
     draw = ImageDraw.Draw(img)
-    draw.ellipse((int(10*random.random()), int(30*random.random()), int(75*random.random()), int(100*random.random())), outline="black", width=int(5*random.random()),fill=color)
-    draw.ellipse((int(25*random.random()), int(75*random.random()), int(90*random.random()), int(110*random.random())), outline="white", width=int(5*random.random()),fill=color)
-    img = img.rotate(int(130*random.randint(-1, 1)))
+    draw.ellipse((int(10*random.random()), int(30*random.random()), int(75*random.random()), int(100*random.random())), outline=random_color(), width=int(5*random.random()),fill=color)
+    draw.ellipse((int(25*random.random()), int(75*random.random()), int(90*random.random()), int(110*random.random())), outline=random_color(), width=int(5*random.random()),fill=color)
+    img = img.rotate(random.randint(0, 360), expand=1, fillcolor = color)
     img.save(img_path)
 
-def rectangle(img_path, color=(255,0,0)):
+def rectangle(img_path, color=random_color()): # (255,0,0) 
     img = Image.open(img_path)
     
     draw = ImageDraw.Draw(img)
-    draw.rectangle((int(60*random.random()), int(70*random.random()), int(30*random.random()), int(120*random.random())), outline="white", width=int(10*random.random()),fill=color)
-    draw.rectangle((int(80*random.random()), int(90*random.random()), int(75*random.random()), int(100*random.random())), outline="black", width=int(10*random.random()),fill=color)
-    img = img.rotate(int(160*random.randint(-1, 1)))
+    draw.rectangle((int(60*random.random()), int(70*random.random()), int(30*random.random()), int(120*random.random())), outline=random_color(), width=int(10*random.random()),fill=color)
+    draw.rectangle((int(80*random.random()), int(90*random.random()), int(75*random.random()), int(100*random.random())), outline=random_color(), width=int(10*random.random()),fill=color)
+    img = img.rotate(random.randint(0, 360), expand=1, fillcolor = color)
     img.save(img_path)
+
+def files_count(folder):
+    return len(os.listdir(dir))
+
+
 
 width = 128 
 height = 128
-images_per_classes = 1500
+images_per_classes = 3000
+classes_count = 17
 
 color_range_csv = 'color_range.csv' 
 
 if len(sys.argv) > 1:
     color_range_csv = 'color_range_with_gray.csv'
 
-f_csv = open(os.path.join('images', 'images_color_range.csv'), 'w', newline='')
+f_csv = open(os.path.join('images', color_range_csv), 'w', newline='')
 writer_csv = csv.writer(f_csv)
 writer_csv.writerow(['red','green','blue','color'])
 
 
 
 df = pd.read_csv (os.path.join('dataset', color_range_csv), sep=';', usecols= ['color', 'color_name','red', 'green', 'blue', 'lig']) 
-print(df.head())
+
+print(color_range_csv)
+print(df.color.unique())
+print(sleep(5))
 
 i = 0
 
@@ -91,7 +104,7 @@ while(True):
             blue = row['blue']
             lig = row['lig']
 
-            if lig > 85 or lig < 25:
+            if lig > 86 or lig < 24:
                 continue
 
             path = os.path.join('images', f, color)
@@ -116,7 +129,7 @@ while(True):
                 print(i, image_full_path)
                 i = i+1
     
-    if sum([len(files) for r, d, files in os.walk('./images')]) > (images_per_classes-100) * 16 * 3:
+    if sum([len(files) for r, d, files in os.walk('./images')]) > (images_per_classes-10) * classes_count * 3:
         break
 
  
