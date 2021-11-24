@@ -64,8 +64,8 @@ def files_count(folder):
 
 width = 128 
 height = 128
-images_per_classes = 3000
-classes_count = 17
+images_per_classes = 1000
+classes_count = 2
 
 color_range_csv = 'color_range.csv' 
 

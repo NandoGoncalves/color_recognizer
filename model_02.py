@@ -12,7 +12,7 @@ import matplotlib.pyplot as plt
 
 width = 128 
 height = 128
-epochs = 20
+epochs = 10
 
 df = pd.read_csv ("./images/color_range.csv", sep=',') 
 #print(df['color'].head())
@@ -48,7 +48,7 @@ model = keras.Sequential([
     keras.layers.Dense(16, kernel_regularizer=regularizers.l2(0.001), activation='relu'), # 
 
 
-    keras.layers.Dense(16)
+    keras.layers.Dense(2)
   ])
 
 

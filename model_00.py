@@ -51,7 +51,7 @@ model.add(keras.layers.Dense(32, activation='relu'))
 model.add(keras.layers.Dense(32, activation=keras.layers.LeakyReLU(alpha=0.01))) # keras.layers.LeakyReLU(alpha=0.01)
 #model.add(keras.layers.Dense(256, activation='relu'))
 #model.add(keras.layers.Dense(128, activation='relu'))
-model.add(keras.layers.Dense(16, activation='softmax'))
+model.add(keras.layers.Dense(1, activation='softmax'))
 
 model.summary()
 

@@ -11,13 +11,9 @@ model.summary()
 
 
 
-y_labels = ['Blue', 'Blue-Magenta', 'Cyan', 'Cyan-Blue',
-       'Green', 'Green-Cyan', 'Magenta',
-       'Magenta-Pink', 'Orange-Brown', 'Orange-Yellow',
-       'Pink', 'Pink-Red', 'Red', 'Red-Orange',
-       'Yellow', 'Yellow-Green']
+y_labels = ['Blue', 'Other']
 
-ratios = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+ratios = [0, 0]
 
 df_color = pd.DataFrame(list(zip(y_labels, ratios)), columns=['color','ratio'])
 
